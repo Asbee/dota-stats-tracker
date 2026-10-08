@@ -1,8 +1,12 @@
 from db import get_db_connection
 
 
-def get_most_played_hero():
-    conn = get_db_connection()
+def get_most_played_hero(conn=None):
+
+    owns_connection = conn is None
+    if owns_connection:
+        conn = get_db_connection()
+
     cur = conn.cursor()
 
     try:
@@ -16,13 +20,18 @@ def get_most_played_hero():
         result = cur.fetchone()
     finally:
         cur.close()
-        conn.close()
+        if owns_connection:
+            conn.close()
 
     return result
 
 
-def get_winrate():
-    conn = get_db_connection()
+def get_winrate(conn=None):
+
+    owns_connection = conn is None
+    if owns_connection:
+        conn = get_db_connection()
+
     cur = conn.cursor()
 
     try:
@@ -35,7 +44,8 @@ def get_winrate():
         result = cur.fetchone()
     finally:
         cur.close()
-        conn.close()
+        if owns_connection:
+            conn.close()
 
     return result[0]
 
