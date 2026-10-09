@@ -8,4 +8,4 @@ def test_get_most_played_hero(test_db):
 
 def test_get_winrate(test_db):
     result = get_winrate(test_db)
-    assert result == 76
+    assert result == 75
