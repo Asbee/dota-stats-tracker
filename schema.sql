@@ -1,0 +1,3 @@
+CREATE TABLE players (id SERIAL PRIMARY KEY, steam_id BIGINT UNIQUE NOT NULL, player_name TEXT);
+CREATE TABLE player_matches (id SERIAL PRIMARY KEY, player_id INTEGER REFERENCES players(id), match_id BIGINT NOT NULL, hero_id INTEGER, kills INTEGER, deaths INTEGER, assists INTEGER, duration INTEGER, win BOOLEAN, UNIQUE (player_id, match_id));
+CREATE TABLE heroes (id INTEGER PRIMARY KEY NOT NULL, name TEXT);
