@@ -50,5 +50,26 @@ def get_winrate(conn=None):
     return result[0]
 
 
+def get_avg_kills(conn=None):
+
+    owns_connection = conn is None
+    if owns_connection:
+        conn = get_db_connection()
+
+    cur = conn.cursor()
+
+    try:
+        cur.execute("""
+        SELECT AVG(kills) FROM player_matches;
+        """)
+        result = cur.fetchone()
+    finally:
+        cur.close()
+        if owns_connection:
+            conn.close()
+
+    return result[0]
+
+
 if __name__ == "__main__":
     print(get_winrate())
