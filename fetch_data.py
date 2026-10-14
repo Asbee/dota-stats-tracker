@@ -5,9 +5,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-account_id = os.getenv("STEAM_ACCOUNT_ID")
+account_id = os.environ["STEAM_ACCOUNT_ID"]
+if not account_id:
+    raise Exception("STEAM_ACCOUNT_ID is empty in .env")
+
 recent_matches = f"https://api.opendota.com/api/players/{account_id}/matches?limit=100"
 response = requests.get(recent_matches)
+response.raise_for_status()
 result = response.json()
 
 
