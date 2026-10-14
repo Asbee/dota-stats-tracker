@@ -1,7 +1,11 @@
 import requests
 from db import get_db_connection
+import os
+from dotenv import load_dotenv
 
-account_id = 71920194
+load_dotenv()
+
+account_id = os.getenv("STEAM_ACCOUNT_ID")
 recent_matches = f"https://api.opendota.com/api/players/{account_id}/matches?limit=100"
 response = requests.get(recent_matches)
 result = response.json()
